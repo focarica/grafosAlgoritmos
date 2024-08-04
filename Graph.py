@@ -30,7 +30,6 @@ class Graph:
                     u = i
 
             if u is None or u == end_vertex:
-                print(f"Distâncias: {distances}")
                 break
 
             visited[u] = True
