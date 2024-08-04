@@ -1,68 +1,72 @@
 from copy import deepcopy
 
-def hierholzer(grafo: dict):
+
+class Hierholzer:
     
-    # Verifica se todos os vértices têm grau par
-    for v in grafo:
-        if len(grafo[v]) % 2 != 0:
-            return 'Grafo Não Euleriano'
-
-
-    ciclo = []
-    subciclo = []
     
-    # Grafo auxiliar para nao modificar o original
-    arestas = deepcopy(grafo)
-
-    # Escolha um vértice inicial arbitrário com arestas
-    for v in grafo:
-        if grafo[v]:
-            vertice_inicial = v
-            break
-
-    while True:
-        subciclo.append(vertice_inicial)
+        def __init__(self, grafo: dict, verticeInicial = None):
+            '''
+            grafo = dicionario de dados contendo a lista de adjacencia de todos os vertices do grafo\n
+            verticeInicial = Primeiro adicionado; caso nenhum for passado
+            '''
+            
+            
+            self.grafo = grafo
+            self.verticeInicial = verticeInicial
         
-        # Enquanto tiver alguma aresta não percorrida ligando o vertice
-        while arestas[vertice_inicial]:
+        
+        def isImpar(self):
+            for v in self.grafo:
+                if len(self.grafo[v]) % 2 != 0:
+                    return True
+
+        # Se o vertice inicial n for passado sera o primeiro que for adicionado.
+        def escolhaVerticeInicial(self):
+            if self.verticeInicial == None:
+                for v in self.grafo:
+                    if self.grafo[v]:
+                        self.verticeInicial = v
+                        break
+
+        def hierholzer(self):            
+            if self.isImpar():
+                return "Grafo Não Euleriano"
             
-            # Remove a primeira aresta da lista do vertice atual. De ambos os lados
-            proximo_vertice = arestas[vertice_inicial].pop(0)
-            arestas[proximo_vertice].remove(vertice_inicial)
+            self.escolhaVerticeInicial()
             
+            ciclo = []
+            subciclo = []
             
-            vertice_inicial = proximo_vertice
-            subciclo.append(vertice_inicial)
+            # Grafo auxiliar para nao modificar o original
+            arestas = deepcopy(self.grafo)
 
-        if not ciclo:
-            ciclo = subciclo
-        else:
-            index = ciclo.index(subciclo[0])
-            ciclo = ciclo[:index] + subciclo + ciclo[index + 1:]
+            while True:
+                subciclo.append(self.verticeInicial)
+                
+                # Enquanto tiver alguma aresta não percorrida ligando o vertice
+                while arestas[self.verticeInicial]:
+                    
+                    # Remove a primeira aresta da lista do vertice atual. De ambos os lados
+                    proximo_vertice = arestas[self.verticeInicial].pop(0)
+                    arestas[proximo_vertice].remove(self.verticeInicial)
+                    
+                    self.verticeInicial = proximo_vertice
+                    subciclo.append(self.verticeInicial)
 
-        for i in range(len(ciclo)):
-            if arestas[ciclo[i]]:
-                vertice_inicial = ciclo[i]
-                subciclo = []
-                break
-        else:
-            break
+                # Verifica se ja existe algum ciclo existente; se cair no else um novo subciclo é inserido no ciclo principal
+                if not ciclo:
+                    ciclo = subciclo
+                else:
+                    index = ciclo.index(subciclo[0])
+                    ciclo = ciclo[:index] + subciclo + ciclo[index + 1:]
 
-    return ciclo
+                # Verifica se após a criação do ciclo ainda existe algum aresta não percorrida, se sim vai para ela e reinicia o algoritmo
+                for i in range(len(ciclo)):
+                    if arestas[ciclo[i]]:
+                        self.verticeInicial = ciclo[i]
+                        subciclo = []
+                        break
+                else:
+                    break
 
-# Grafo de exemplo: todos os vértices têm grau par
-
-grafo = {
-    1: [2, 3],
-    2: [1, 3, 4, 5],
-    3: [1, 2, 4, 5],
-    4: [2, 3, 5, 6],
-    5: [2, 3, 4, 6],
-    6: [4, 5]
-}
-
-
-
-
-ciclo_euleriano = hierholzer(grafo)
-print("Ciclo Euleriano:", ciclo_euleriano)
+            return ciclo
