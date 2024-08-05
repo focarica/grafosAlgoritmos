@@ -1,0 +1,108 @@
+Dijkstra
+//Iniciando sempre do vertice 1 e indo até o ultimo
+
+1000 vertices e extramamente denso:
+
+1 - 107801485 ns
+2 - 108178872 ns
+3 - 109376333 ns
+4 - 114573694 ns
+5 - 8652425 ns
+6 - 107751496 ns
+7 - 104380101 ns
+
+media = 94473772 ns
+
+
+50 vertices e não muito denso:
+
+1 - 166889 ns
+2 - 133287 ns
+3 - 167875 ns
+4 - 162973 ns
+5 - 136579 ns
+6 - 166780 ns
+7 - 167633 ns
+
+media = 157429 ns
+
+
+15 vertices e +/- denso
+
+1 - 33960 ns
+2 - 41926 ns
+3 - 40323 ns
+4 - 32231 ns
+5 - 40877 ns
+6 - 41485 ns
+7 - 41485 ns
+
+media = 38898 ns
+
+
+6 vertices e +/- denso
+
+1 - 20926 ns
+2 - 22353 ns
+3 - 21258 ns
+4 - 21298 ns
+5 - 21285 ns
+6 - 21200 ns
+7 - 22325 ns
+
+media = 21492 ns
+
+Hierholzer
+// Iniciando sempre pelo vertice colocado primeiro
+
+1000 vertices e extramamente denso:
+
+1 - 2390576288 ns
+2 - 2477808539 ns
+3 - 2187242085 ns
+4 - 2218351813 ns
+5 - 2068924627 ns
+6 - 2124348111 ns
+7 - 2098533218 ns
+
+media = 2227945375 ns
+
+
+53 vertices e n muito denso
+
+1 - 266632 ns
+2 - 272687 ns
+3 - 269334 ns
+4 - 276386 ns
+5 - 340547 ns
+6 - 267537 ns
+7 - 271786 ns
+
+media = 281129 ns
+
+
+20 vertices e +/- denso
+
+1 - 228574 ns
+2 - 133797 ns
+3 - 155446 ns
+4 - 135235 ns
+5 - 132805 ns
+6 - 130154 ns
+7 - 157920 ns
+
+media = 153847 ns
+
+6 vertices e n denso
+
+1 - 58790 ns
+2 - 71985 ns
+3 - 105376 ns
+4 - 83981 ns
+5 - 100754 ns
+6 - 75550 ns 
+7 - 59409 ns
+
+media = 79392 ns
+
+
